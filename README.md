@@ -1,4 +1,5 @@
 # DEVOO-THERAPY-AI-
+![alt text](image.png)
 
 Welcome to the AI Therapy App project! This app aims to revolutionize mental health care by offering users personalized therapy sessions through AI-driven interactions. Our mission is to make mental health support accessible, affordable, and effective for everyone.
 
@@ -18,5 +19,3 @@ Database: PostgreSQL
 work cited 
 chat gpt by open ai
 
-
-![alt text](image.png)
