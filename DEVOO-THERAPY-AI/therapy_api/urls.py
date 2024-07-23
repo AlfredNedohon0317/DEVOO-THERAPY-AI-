@@ -24,3 +24,4 @@ urlpatterns = [
     path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/', include('therapy.urls')),
 ]
+
