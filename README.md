@@ -19,3 +19,4 @@ Database: PostgreSQL
 work cited 
 chat gpt by open ai
 
+reverted back to last commit 7/24
