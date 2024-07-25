@@ -7,6 +7,7 @@ urlpatterns = [
     path('community_messages/', views.CommunityMessageViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('signup/', views.signup, name='signup'),
     path('generate-response/', views.generate_response, name='generate-response'),
-    path('update_account/', views.update_account, name='update_account'),  # Update account route
-    path('delete_account/', views.delete_account, name='delete_account'),  # Delete account route
+    path('update_account/', views.update_account, name='update_account'),
+    path('delete_account/', views.delete_account, name='delete_account'),
+
 ]
