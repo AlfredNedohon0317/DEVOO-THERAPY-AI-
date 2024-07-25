@@ -1,17 +1,13 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import TherapistViewSet, ExerciseViewSet, CommunityMessageViewSet, signup
-
-router = DefaultRouter()
-router.register(r'therapists', TherapistViewSet)
-router.register(r'exercises', ExerciseViewSet)
-router.register(r'community_messages', CommunityMessageViewSet)
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('signup/', signup, name='signup'),
+    path('therapists/', views.TherapistViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('exercises/', views.ExerciseViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('community_messages/', views.CommunityMessageViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('signup/', views.signup, name='signup'),
+    path('generate-response/', views.generate_response, name='generate-response'),  # New route
 ]
-
 
 
 
