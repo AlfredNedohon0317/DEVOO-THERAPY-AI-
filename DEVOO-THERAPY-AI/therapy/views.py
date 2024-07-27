@@ -62,33 +62,7 @@ def signup(request):
         logger.error("Error creating user: %s", str(e))
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-# # OpenAI ChatGPT response generation
-# @api_view(['POST'])
-# def generate_response(request):
-#     prompt = request.data.get('prompt')
-#     if not prompt:
-#         logger.error("No prompt provided in request")
-#         return Response({"error": "No prompt provided"}, status=status.HTTP_400_BAD_REQUEST)
-
-#     openai.api_key = os.getenv("OPENAI_API_KEY")
-
-#     try:
-#         logger.debug("Sending request to OpenAI with prompt: %s", prompt)
-#         response = openai.Completion.create(
-#             engine="text-davinci-003",
-#             prompt=prompt,
-#             max_tokens=150
-#         )
-#         ai_response = response.choices[0].text.strip()
-#         logger.debug("Received response from OpenAI: %s", ai_response)
-#         return Response({"response": ai_response}, status=status.HTTP_200_OK)
-#     except Exception as e:
-#         logger.error("Error generating response: %s", str(e))
-#         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
 # OpenAI ChatGPT response generation
-
 @api_view(['POST'])
 def generate_response(request):
     prompt = request.data.get('prompt')
@@ -96,24 +70,25 @@ def generate_response(request):
         logger.error("No prompt provided in request")
         return Response({"error": "No prompt provided"}, status=status.HTTP_400_BAD_REQUEST)
 
-    logger.debug("Received prompt: %s", prompt)
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     try:
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=prompt,
-            max_tokens=150
+        logger.debug("Sending request to OpenAI with prompt: %s", prompt)
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}]
         )
-        ai_response = response.choices[0].text.strip()
+        ai_response = response.choices[0].message['content'].strip()
         logger.debug("Received response from OpenAI: %s", ai_response)
         return Response({"response": ai_response}, status=status.HTTP_200_OK)
-    except Exception as e:
-        logger.error("Error generating response: %s", str(e))
+    except openai.error.OpenAIError as e:
+        logger.error("OpenAI API error: %s", str(e))
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-    
-# # Update account view
+    except Exception as e:
+        logger.error("General error: %s", str(e))
+        return Response({"error": "An unexpected error occurred"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# Update account view
 @api_view(['PUT'])
 def update_account(request):
     user = request.user

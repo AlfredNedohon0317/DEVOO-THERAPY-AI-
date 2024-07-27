@@ -1,0 +1,22 @@
+# .gitignore
+
+# Python
+*.pyc
+__pycache__
+
+# Environment Variables
+.env
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+
+# Frontend
+node_modules/
+dist/
+build/
+.env.local
