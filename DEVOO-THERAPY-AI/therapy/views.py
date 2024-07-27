@@ -62,10 +62,13 @@ def signup(request):
         logger.error("Error creating user: %s", str(e))
         return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+
 # OpenAI ChatGPT response generation
 @api_view(['POST'])
 def generate_response(request):
     prompt = request.data.get('prompt')
+    ai_name = "DEVOO"  # Example AI name
+
     if not prompt:
         logger.error("No prompt provided in request")
         return Response({"error": "No prompt provided"}, status=status.HTTP_400_BAD_REQUEST)
@@ -80,7 +83,8 @@ def generate_response(request):
         )
         ai_response = response.choices[0].message['content'].strip()
         logger.debug("Received response from OpenAI: %s", ai_response)
-        return Response({"response": ai_response}, status=status.HTTP_200_OK)
+        # Adding the AI name in the first person
+        return Response({"response": f"{ai_response}"}, status=status.HTTP_200_OK)
     except openai.error.OpenAIError as e:
         logger.error("OpenAI API error: %s", str(e))
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

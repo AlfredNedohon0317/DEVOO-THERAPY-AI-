@@ -5,8 +5,8 @@ class Therapist(models.Model):
     name = models.CharField(max_length=100)
     specialty = models.CharField(max_length=100)
     website = models.URLField(blank=True)
-    phone_number = models.CharField(max_length=20, blank=True)  # New field for phone number
-    location = models.CharField(max_length=255, blank=True)     # New field for location
+    phone_number = models.CharField(max_length=20, blank=True)
+    location = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name
@@ -15,7 +15,7 @@ class Exercise(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     video_url = models.URLField(blank=True)
-    website_url = models.URLField(blank=True)  # New field for website URL
+    website_url = models.URLField(blank=True) 
 
     def __str__(self):
         return self.title
@@ -27,3 +27,4 @@ class CommunityMessage(models.Model):
 
     def __str__(self):
         return f"{self.user.username}: {self.message[:20]}"
+
