@@ -16,7 +16,17 @@ Backend: Django REST Framework
 AI Model: OpenAI GPT
 Database: PostgreSQL
 
+New technologies used 
+open ai chat gpt api key 
+emojimart
+
+
+later implimentations log out button , diary!
+
 work cited 
 chat gpt by open ai
 
-reverted back to last commit 7/24
+
+
+![alt text](image-1.png)
+
