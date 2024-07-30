@@ -26,6 +26,9 @@ class CommunityMessageViewSet(viewsets.ModelViewSet):
     queryset = CommunityMessage.objects.all()
     serializer_class = CommunityMessageSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 # Signup view
 @api_view(['POST'])
 def signup(request):

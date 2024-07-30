@@ -4,14 +4,17 @@ from .models import Therapist, Exercise, CommunityMessage
 class TherapistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Therapist
-        fields = ['id', 'name', 'specialty', 'website', 'phone_number', 'location']
+        fields = '__all__'
 
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
-        fields = ['id', 'title', 'description', 'video_url', 'website_url']
+        fields = '__all__'
 
 class CommunityMessageSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(read_only=True)
+
     class Meta:
         model = CommunityMessage
         fields = ['id', 'message', 'created_at', 'user']
+        read_only_fields = ['id', 'created_at', 'user']
